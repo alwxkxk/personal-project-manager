@@ -1,45 +1,54 @@
 import React from 'react';
-import {Icon,Menu,Dropdown}  from 'antd';
+import {Icon, NavBar, Drawer, List}  from 'antd-mobile';
 import Projects from './pages/projects/Projects';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import Home from './pages/home/Home';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+// import { render } from 'react-dom';
 
 
-function Users() {
-  return <h2>Users</h2>;
+
+const sidebar = (
+  <List>
+    <List.Item>
+      <Link to="/">首页</Link>
+    </List.Item>
+    <List.Item>
+      <Link to="/Projects">项目</Link>
+    </List.Item>
+  </List>
+)
+class App extends React.Component {
+  state = {
+    open: false,
+  }
+  onOpenChange = () => {
+    this.setState({ open: !this.state.open });
+  }
+  render(){
+    return (
+     
+        <Router>
+          <NavBar icon={<Icon type="ellipsis" />}  onLeftClick={this.onOpenChange}>页面标题</NavBar>
+          <Drawer
+            className="my-drawer"
+            style={{ minHeight: '100vh' }}
+            enableDragHandle
+            contentStyle={{ color: '#A6A6A6', textAlign: 'center'}}
+            sidebar={sidebar}
+            open={this.state.open}
+            onOpenChange={this.onOpenChange}
+          >
+            <Route path="/" exact component={Home} />
+            <Route path="/Projects/" component={Projects} />  
+          </Drawer>
+        </Router>
+    );
+  }
+
 }
 
-const menu = (
-  <Menu>
-    <Menu.Item ><Link to="/">Home</Link></Menu.Item>
-    <Menu.Item><Link to="/projects/">projects</Link></Menu.Item>
-    <Menu.Item><Link to="/users/">Users</Link></Menu.Item>
-  </Menu>
-);
 
-const App: React.FC = () => {
-  return (
-    <Router>
-      <div className="header flex">
-        <div className="title">personal project manager </div>
-        <div className="avatar">
-          <img alt="avatar" src={logo} className="full"></img>
-        </div>
-        
-        <Dropdown overlay={menu}>
-          <Icon type="menu"  className="menu"/>
-        </Dropdown>
-      </div>
-
-      <div>
-        <Route path="/" exact component={Home} />
-        <Route path="/projects/" component={Projects} />
-        <Route path="/users/" component={Users} />
-      </div>
-    </Router>
-  );
-}
 
 export default App;

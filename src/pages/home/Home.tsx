@@ -1,9 +1,91 @@
 import React from 'react';
-
+import { Pagination } from 'antd-mobile';
 
 const Home: React.FC = () => {
   return (
-    <div>Home page</div>
+    <div className="page">
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+      <div>Home page</div>
+    </div>
+
   );
 }
 
