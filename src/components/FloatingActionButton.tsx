@@ -8,9 +8,7 @@ interface FloatingActionButtonProps {
 
 
 class FloatingActionButton extends React.Component<FloatingActionButtonProps> {
-  constructor(props:any) {
-    super(props);
-  }
+
   render(){
     return (
       <Button type="primary" 
@@ -18,16 +16,16 @@ class FloatingActionButton extends React.Component<FloatingActionButtonProps> {
       onClick={()=>this.props.onClick()}
       style={{
         position:'fixed',
-        bottom:30,
-        right:30,
-        width:48,
-        height:48,
+        bottom:'1rem',
+        right:'1rem',
+        width:'2.5rem',
+        height:'2.5rem',
         borderRadius:'50%',
-        zIndex: 99
+        zIndex: 2
       }}>
 
         <div className="full" style={{
-          background:`url(${add}) center center /  32px 32px no-repeat`
+          background:`url(${add}) center center /  1.5rem 1.5rem no-repeat`
         }}>
         </div>
 

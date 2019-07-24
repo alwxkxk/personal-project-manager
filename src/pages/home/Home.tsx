@@ -1,92 +1,33 @@
 import React from 'react';
-import { Pagination } from 'antd-mobile';
+import {setNavbarTitle} from "../../redux/actions";
+import { connect } from "react-redux";
 
-const Home: React.FC = () => {
-  return (
-    <div className="page">
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-      <div>Home page</div>
-    </div>
 
-  );
+
+class Home extends React.Component<any> {
+  constructor(props:any){
+    super(props)
+    this.props.setNavbarTitle("首页")
+  }
+
+
+  render(){
+    return (
+      <div className="page">
+
+
+        <div>Home page</div>
+        <div>Home page</div>
+      </div>
+  
+    );
+  }
+
 }
 
-export default Home;
+// export default Home;
+
+export default connect(
+  null,
+  {setNavbarTitle}
+)(Home);

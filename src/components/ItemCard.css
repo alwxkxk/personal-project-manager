@@ -1,0 +1,32 @@
+.item-card{
+  text-indent: 0.5rem;
+}
+
+.item-card .am-list-body{
+  position: inherit;
+}
+
+.item-card .active{
+  border-left: 0.5rem solid rgb(71, 208, 65);
+  color:black;
+}
+
+.item-card .active .title{
+  color: #0366d6;
+  font-weight: 600;
+}
+
+.item-card .complete{
+  border-left: 0.5rem solid #ebedf0;
+  color:#ebedf0;
+}
+
+.item-card .complete .title-link{
+  color:#ebedf0;
+}
+
+.item-card .am-checkbox.am-checkbox-checked .am-checkbox-inner{
+  background-color:rgb(71, 208, 65);
+  border-color:rgb(71, 208, 65);
+}
+

@@ -4,19 +4,24 @@ import ProjectList from './components/ProjectList';
 import FloatingActionButton from '../../components/FloatingActionButton';
 // import ProjectSetting from './components/ProjectSetting';
 import AddingProject from './components/AddingProject';
-import './Projects.css';
+import { connect } from "react-redux";
+import {setNavbarTitle} from "../../redux/actions";
+import "./Projects.css";
 
-class Projects extends React.Component<{},{modal:boolean}>{
+
+
+class Projects extends React.Component<any,{modal:boolean}>{
   constructor(props:any){
     super(props);
     this.state={
       modal:false
     }
+    this.props.setNavbarTitle('所有项目');
   }
 
   render() {
     return (
-      <div className="page">
+      <div className="page projects">
 
         <FloatingActionButton onClick={()=>this.setState({modal:true})}></FloatingActionButton>
 
@@ -39,4 +44,9 @@ class Projects extends React.Component<{},{modal:boolean}>{
   }
 }
 
-export default Projects;
+// export default Projects;
+
+export default connect(
+  null,
+  {setNavbarTitle}
+)(Projects);

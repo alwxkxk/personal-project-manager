@@ -1,27 +1,27 @@
 import React from 'react';
 import moment from 'moment';
-import { InputItem, List, WingBlank, WhiteSpace, TextareaItem, DatePicker, Button, Flex } from 'antd-mobile';
-import { addProject } from "../../../redux/actions";
+import { InputItem, List, WhiteSpace, TextareaItem, DatePicker, Button } from 'antd-mobile';
+import { addProjectAction } from "../../../redux/actions";
 import { connect } from "react-redux";
 
 interface IAddingProjectProps{
-  addProject:Function
+  addProjectAction:Function
   onClick?:Function
 }
 
-class AddingProject extends React.Component<IAddingProjectProps,{deadline:any,title:string,desc:any}> {
+class AddingProject extends React.Component<IAddingProjectProps,any> {
   constructor(props:any) {
     super(props)
 
     this.state={
       deadline:null,
-      title:'新项目名称',
-      desc:'...'
+      title:'',
+      desc:''
     }
   }
 
   handleClick(){
-    this.props.addProject(this.state);
+    this.props.addProjectAction(this.state);
     if(this.props.onClick){
       this.props.onClick();
     }
@@ -32,6 +32,7 @@ class AddingProject extends React.Component<IAddingProjectProps,{deadline:any,ti
       <div >
         <List>
           <InputItem
+          placeholder="新项目名"
           value={this.state.title}
           onChange={v => this.setState({ title:v })}
           >名称</InputItem>
@@ -39,6 +40,7 @@ class AddingProject extends React.Component<IAddingProjectProps,{deadline:any,ti
           <WhiteSpace/>
 
           <TextareaItem
+            placeholder="..."
             title="描述"
             rows={3}
             value={this.state.desc}
@@ -49,7 +51,6 @@ class AddingProject extends React.Component<IAddingProjectProps,{deadline:any,ti
 
           <DatePicker
             mode="date"
-            title="Select Date"
             minDate={moment().toDate()}
             onChange={date => this.setState({ deadline:date })}
             value={this.state.deadline}
@@ -57,7 +58,7 @@ class AddingProject extends React.Component<IAddingProjectProps,{deadline:any,ti
             <List.Item arrow="horizontal">截止日期</List.Item>
           </DatePicker>
           
-          <Button type="primary" onClick={()=>this.handleClick()}>确认</Button>
+          <Button type="primary" onClick={()=>this.handleClick()}>创建</Button>
 
         </List>
       </div>
@@ -70,5 +71,5 @@ class AddingProject extends React.Component<IAddingProjectProps,{deadline:any,ti
 
 export default connect(
   null,
-  { addProject }
+  { addProjectAction }
 )(AddingProject);
