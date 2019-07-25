@@ -11,13 +11,17 @@ db.version(1).stores({
 
 
 export function saveProject(project:IProject) {
-  db.projects.add(project)
+  db.projects.put(project)
+}
+
+export function deleteProject(project:IProject) {
+  db.projects.where("uuid").equals(project.uuid).delete()
 }
 
 export function saveTask(task:ITask) {
-  db.tasks.add(task)
+  db.tasks.put(task)
 }
-
+// TODO :can be replace by saveTask
 export function updateTask(task:ITask) {
   db.tasks.put(task)
 }

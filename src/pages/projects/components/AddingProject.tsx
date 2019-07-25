@@ -1,8 +1,8 @@
 import React from 'react';
-import moment from 'moment';
-import { InputItem, List, WhiteSpace, TextareaItem, DatePicker, Button } from 'antd-mobile';
+import { Button } from 'antd-mobile';
 import { addProjectAction } from "../../../redux/actions";
 import { connect } from "react-redux";
+import SettingProjectCommon from './SettingProjectCommon';
 
 interface IAddingProjectProps{
   addProjectAction:Function
@@ -27,40 +27,24 @@ class AddingProject extends React.Component<IAddingProjectProps,any> {
     }
   }
 
+  onChange(key:string,value:any){
+    const s:any = {}
+    s[key] = value
+    this.setState(s)
+  }
+
   render(){
     return (
       <div >
-        <List>
-          <InputItem
-          placeholder="新项目名"
-          value={this.state.title}
-          onChange={v => this.setState({ title:v })}
-          >名称</InputItem>
+        <SettingProjectCommon
+          title={this.state.title}
+          desc={this.state.desc}
+          deadline={this.state.deadline}
+          onChange={(key:string,value:any)=>this.onChange(key,value)}
+        >
 
-          <WhiteSpace/>
-
-          <TextareaItem
-            placeholder="..."
-            title="描述"
-            rows={3}
-            value={this.state.desc}
-            onChange={v => this.setState({ desc:v })}
-          >
-
-          </TextareaItem>
-
-          <DatePicker
-            mode="date"
-            minDate={moment().toDate()}
-            onChange={date => this.setState({ deadline:date })}
-            value={this.state.deadline}
-          >
-            <List.Item arrow="horizontal">截止日期</List.Item>
-          </DatePicker>
-          
-          <Button type="primary" onClick={()=>this.handleClick()}>创建</Button>
-
-        </List>
+        </SettingProjectCommon>
+        <Button type="primary" onClick={()=>this.handleClick()}>创建</Button>
       </div>
     );
   } 

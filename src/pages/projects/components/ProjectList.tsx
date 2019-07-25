@@ -1,9 +1,10 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { WingBlank, Card, WhiteSpace, Button } from 'antd-mobile';
+import { WingBlank, Card, WhiteSpace, Button, Modal } from 'antd-mobile';
 import moment  from 'moment';
 import { Link } from "react-router-dom";
 import {setGlobalProject,setGlobalTasksByProjectId} from "../../../redux/actions";
+import SettingProject from './SettingProject';
 
 const mapStateToProps = (state:any)=>{
   const {projects} = state;
@@ -17,7 +18,14 @@ const sortFunc = (a:IProject,b:IProject)=>{
 }
 
 
-class ProjectList extends React.Component<any> {
+class ProjectList extends React.Component<any,any> {
+  constructor(props:any){
+    super(props)
+    this.state={
+      modal:false,
+      project:{}
+    }
+  }
   handleClick(project:IProject){
     this.props.setGlobalProject(project);
     this.props.setGlobalTasksByProjectId(project.uuid)
@@ -28,34 +36,58 @@ class ProjectList extends React.Component<any> {
     
     const list = this.props.projects.sort(sortFunc).map((p:any)=>{
       return (
-        <WingBlank size="lg" key={p.uuid}>
-          <WhiteSpace size="sm" />
-          <Card>
-              <Card.Header
-                title={
-                  <Link to={`/Project/${p.uuid}`} onClick={()=>this.handleClick(p)}>
-                    <div>{p.title}</div>
-                  </Link>
+        <div key={p.uuid}>
+          <WingBlank size="lg" key={p.uuid}>
+            <WhiteSpace size="sm" />
+            <Card>
+                <Card.Header
+                  title={
+                    <Link to={`/Project/${p.uuid}`} onClick={()=>this.handleClick(p)}>
+                      <div>{p.title}</div>
+                    </Link>
+                  }
+                  // thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
+                  extra={
+                    <div className="flex" style={{justifyContent:'flex-end'}}>
+                      <Button 
+                        icon="ellipsis" 
+                        size="small" 
+                        style={{width:'3rem'}}
+                        onClick={()=>this.setState({modal:true,project:p})}
+                        ></Button>
+                    </div>
                 }
-                // thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
-                extra={
-                  <div className="flex" style={{justifyContent:'flex-end'}}>
-                    <Button icon="ellipsis" size="small" style={{width:'3rem'}}></Button>
-                  </div>
-              }
-              />
-            
+                />
+              
 
-            <Card.Body>
-              <div className="text-left">{p.desc}</div>
-            </Card.Body >
-            <Card.Footer 
-              content={"创建：" + (p.createTime?moment(p.createTime).format('YYYY-MM-DD'):'')}
-              extra={'截止: '+ (p.deadline?moment(p.deadline).format('YYYY-MM-DD'):'无')} 
-            />
-          </Card>
-          <WhiteSpace size="sm" />
-        </WingBlank>
+              <Card.Body>
+                <div className="text-left">{p.desc}</div>
+              </Card.Body >
+              <Card.Footer 
+                content={"创建：" + (p.createTime?moment(p.createTime).format('YYYY-MM-DD'):'')}
+                extra={'截止: '+ (p.deadline?moment(p.deadline).format('YYYY-MM-DD'):'无')} 
+              />
+            </Card>
+            <WhiteSpace size="sm" />
+          </WingBlank>
+
+          <Modal
+            visible={this.state.modal}
+            transparent
+            // maskClosable={false}
+            onClose={()=>this.setState({modal:false})}
+            title="项目设置"
+            closable={true}
+          >
+            <div style={{ overflow: 'scroll' }}>
+              <SettingProject
+                project={this.state.project}
+                onClick={()=>this.setState({modal:false})}
+              ></SettingProject>
+            </div>
+        </Modal>
+        </div>
+
       )
     })
     

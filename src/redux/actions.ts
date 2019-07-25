@@ -9,13 +9,16 @@ import {
   SET_TASK,
   DELETE_TASK,
   SET_GLOBAL_SETUPS,
-  GET_GLOBAL_SETUPS
+  GET_GLOBAL_SETUPS,
+  SET_PROJECT,
+  DELETE_PROJECT
 } from './actionTypes';
 
 import {newProject} from '../schema/Project';
 import {newTask} from '../schema/Task';
 import * as db from '../db'
 import store from './store';
+import moment from 'moment';
 
 // get all project data from indexedDB then update page
 //@ts-ignore
@@ -33,6 +36,33 @@ export const addProjectAction = (projectInfo:any) => {
     type: ADD_PROJECT,
     payload: project
   });
+}
+
+
+export function setProjectAction(project:IProject) {
+  const projects = store.getState().projects.slice();
+  project.updateTime = moment().format();
+  projects.forEach((p:IProject)=>{
+    if(p.uuid === project.uuid){
+      Object.assign(p,project)
+    }
+  })
+  db.saveProject(project);
+  return {
+    type:SET_PROJECT,
+    payload:projects
+  }
+}
+
+export function deleteProjectAction(project:IProject) {
+  const projects = store.getState().projects
+  .filter((p:IProject)=>p.uuid !== project.uuid)
+  .slice()
+  db.deleteProject(project)
+  return {
+    type:DELETE_PROJECT,
+    payload:projects
+  }
 }
 
 export const addTaskAction=(taskInfo:any)=>{
