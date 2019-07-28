@@ -9,17 +9,13 @@ const mapStateToProps =(state:any)=>{
   return {setups}
 }
 
-class Setup extends React.Component<any,any> {
+class Setup extends React.PureComponent<any,any> {
   constructor(props:any){
     super(props)
-    this.state={
-      workTime:this.props.setups.workTime || 0
-    }
     this.props.setNavbarTitle("设置")
   }
 
   changeWorkTime(hours:number){
-    this.setState({workTime:hours})
     this.props.setGlobalSetups({
       ...this.props.setups,
       workTime:hours
@@ -28,6 +24,7 @@ class Setup extends React.Component<any,any> {
 
 
   render(){
+    const setups = this.props.setups || {}
     return (
       <div className="page setup"> 
         <WingBlank>
@@ -41,7 +38,7 @@ class Setup extends React.Component<any,any> {
                   max={12}
                   min={0}
                   step={1}
-                  value={this.state.workTime}
+                  value={setups.workTime}
                   onChange={(v)=>this.changeWorkTime(v)}
                 ></Stepper>
               }
