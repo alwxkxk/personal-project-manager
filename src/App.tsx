@@ -62,6 +62,7 @@ class App extends React.Component<any> {
             onOpenChange={this.onOpenChange}
           >
             <Route path="/" exact component={Home} />
+            <Route path="/index" component={Home} />
             <Route path="/Project/" component={Project} />  
             <Route path="/Projects/" component={Projects} />  
             <Route path="/Setup/" component={Setup} />  
