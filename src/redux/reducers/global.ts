@@ -37,20 +37,22 @@ export default function(state:any=initState, action:any) {
       }
 
     case SET_GLOBAL_SETUPS:
-        return {
-          ...state,
-          setups:action.payload
-        }
+      return {
+        ...state,
+        setups:action.payload
+      }
     case GET_GLOBAL_SETUPS:
-      let workTime = action.payload.workTime || 2
+      let result = action.payload || {}
+      if( ! result.workTime){
+        result.workTime = 2
+      }
       return {
         ...state,
         setups:{
-          ...action.payload,
-          workTime:workTime
+          ...result
         }
+        
       }
-
     default:
       return state;
   }
