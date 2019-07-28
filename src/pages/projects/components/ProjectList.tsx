@@ -1,10 +1,11 @@
 import React from 'react';
 import { connect } from "react-redux";
-import { WingBlank, Card, WhiteSpace, Button, Modal } from 'antd-mobile';
+import { WingBlank, Card, WhiteSpace, Modal } from 'antd-mobile';
 import moment  from 'moment';
 import { Link } from "react-router-dom";
 import {setGlobalProject,setGlobalTasksByProjectId} from "../../../redux/actions";
 import SettingProject from './SettingProject';
+import setIcon from '../../../img/set_icon.svg';
 
 const mapStateToProps = (state:any)=>{
   const {projects} = state;
@@ -46,22 +47,23 @@ class ProjectList extends React.Component<any,any> {
                       <div>{p.title}</div>
                     </Link>
                   }
-                  // thumb="https://gw.alipayobjects.com/zos/rmsportal/MRhHctKOineMbKAZslML.jpg"
                   extra={
                     <div className="flex" style={{justifyContent:'flex-end'}}>
-                      <Button 
-                        icon="ellipsis" 
-                        size="small" 
-                        style={{width:'3rem'}}
-                        onClick={()=>this.setState({modal:true,project:p})}
-                        ></Button>
+                      <img 
+                      src={setIcon} 
+                      alt="set_icon"
+                      style={{width:'3rem'}}
+                      className="icon"
+                      onClick={()=>this.setState({modal:true,project:p})}
+                      ></img>
+
                     </div>
                 }
                 />
               
 
               <Card.Body>
-                <div className="text-left">{p.desc}</div>
+                <div className="text-left text-white">{p.desc}</div>
               </Card.Body >
               <Card.Footer 
                 content={"创建：" + (p.createTime?moment(p.createTime).format('YYYY-MM-DD'):'')}

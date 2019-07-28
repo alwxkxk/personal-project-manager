@@ -11,7 +11,7 @@ const initState:any= {
   project:null,
   tasks:[],
   setups:{
-    workTime:0
+    workTime:2
   }
 }
 

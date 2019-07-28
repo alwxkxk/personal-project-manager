@@ -1,0 +1,40 @@
+.task{
+  text-indent: 0.5rem;
+}
+
+.task .am-checkbox.am-checkbox-checked .am-checkbox-inner{
+  background-color:rgb(71, 208, 65);
+  border-color:rgb(71, 208, 65);
+}
+
+
+.task .tip-box{
+  background-color:rgb(71, 208, 65);
+  width:0.3rem;
+  height: 1rem;
+  margin:auto 0.5rem;;
+}
+
+.task .item{
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ccc;
+}
+.task .content{
+  flex-direction: column;
+
+}
+
+.task .content .title{
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.task .content .desc{
+  font-size: 0.8rem;
+  text-align: left;
+}
+
+.task .am-list-item{
+  background-color: #2E374F;
+  min-height: 0;
+}

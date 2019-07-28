@@ -9,10 +9,7 @@ interface ISettingProjectCommon {
   onChange:Function
 }
 
-class SettingProjectCommon extends React.Component<ISettingProjectCommon,any> {
-  constructor(props:ISettingProjectCommon) {
-    super(props);
-  }
+class SettingProjectCommon extends React.PureComponent<ISettingProjectCommon,any> {
 
   render(){
     return (

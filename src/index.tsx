@@ -1,10 +1,15 @@
 import React from 'react';
+import * as Sentry from '@sentry/browser';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from "./redux/store";
+
+if(process.env.REACT_APP_SENTRY){
+  Sentry.init({dsn: process.env.REACT_APP_SENTRY});
+}
 
 
 ReactDOM.render(

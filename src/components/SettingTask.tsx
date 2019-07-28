@@ -10,21 +10,16 @@ interface ISettingTaskProps{
   deleteTaskAction:Function,
   setGlobalTasksByProjectId:Function,
   setTask:Function,
-  onClick?:Function
+  onClick?:Function // for closeModal
 }
 
 class SettingTask extends React.Component<ISettingTaskProps,any>{
   constructor(props:ISettingTaskProps) {
     super(props)
-    const task = props.task;
+    // copy data to state
     this.state={
-      completeTime:task.completeTime,
-      title:task.title,
-      desc:task.desc,
-      taskType:task.taskType,
-      workload:task.workload,
+      ...this.props.task
     }
-    
   }
 
   onChange(key:string,value:any){
@@ -34,7 +29,6 @@ class SettingTask extends React.Component<ISettingTaskProps,any>{
   }
   saveTask(){
     this.props.setTask({
-      ...this.props.task,
       ...this.state
     })
     if(this.props.onClick){

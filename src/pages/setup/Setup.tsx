@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { Stepper, List, WingBlank } from "antd-mobile";
 import {setNavbarTitle,setGlobalSetups} from "../../redux/actions";
+import './Setup.css';
 
 const mapStateToProps =(state:any)=>{
   const {setups} = state.global;
@@ -28,27 +29,30 @@ class Setup extends React.Component<any,any> {
 
   render(){
     return (
-      <WingBlank>
-        <List>
-          <List.Item
-            extra={
-              //@ts-ignore
-              <Stepper
-                style={{ width: '100%'}}
-                showNumber
-                max={12}
-                min={0}
-                step={1}
-                value={this.state.workTime}
-                onChange={(v)=>this.changeWorkTime(v)}
-              ></Stepper>
-            }
-          >
-            工作日时长<sub>/小时</sub>
-          </List.Item>
-        </List>
+      <div className="page setup"> 
+        <WingBlank>
+          <List>
+            <List.Item
+              extra={
+                //@ts-ignore
+                <Stepper
+                  style={{ width: '100%'}}
+                  showNumber
+                  max={12}
+                  min={0}
+                  step={1}
+                  value={this.state.workTime}
+                  onChange={(v)=>this.changeWorkTime(v)}
+                ></Stepper>
+              }
+            >
+              每天投入<sub>/小时</sub>
+            </List.Item>
+          </List>
 
-      </WingBlank>
+        </WingBlank>
+      </div>
+
     )
   }
 }

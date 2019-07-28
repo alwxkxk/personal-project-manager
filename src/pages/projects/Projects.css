@@ -1,4 +1,8 @@
-.projects .am-card-header-content{
-  color: #0366d6;
+.projects .am-card-header-content >a{
   font-weight: 600;
+  color:white;
+}
+
+html:not([data-scale]) .am-card-body::before{
+  background-color: transparent !important;
 }

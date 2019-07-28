@@ -1187,6 +1187,58 @@
   resolved "https://registry.npm.taobao.org/@nodelib/fs.stat/download/@nodelib/fs.stat-1.1.3.tgz?cache=0&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40nodelib%2Ffs.stat%2Fdownload%2F%40nodelib%2Ffs.stat-1.1.3.tgz#2b5a3ab3f918cca48a8c754c08168e3f03eba61b"
   integrity sha1-K1o6s/kYzKSKjHVMCBaOPwPrphs=
 
+"@sentry/browser@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.npm.taobao.org/@sentry/browser/download/@sentry/browser-5.5.0.tgz#ec99ea6897d23affc46d58e6ada32016b27721b5"
+  integrity sha1-7JnqaJfSOv/EbVjmraMgFrJ3IbU=
+  dependencies:
+    "@sentry/core" "5.5.0"
+    "@sentry/types" "5.5.0"
+    "@sentry/utils" "5.5.0"
+    tslib "^1.9.3"
+
+"@sentry/core@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.npm.taobao.org/@sentry/core/download/@sentry/core-5.5.0.tgz#574fdc9228c8b4a909c0140eb0d8b098175c0f47"
+  integrity sha1-V0/ckijItKkJwBQOsNiwmBdcD0c=
+  dependencies:
+    "@sentry/hub" "5.5.0"
+    "@sentry/minimal" "5.5.0"
+    "@sentry/types" "5.5.0"
+    "@sentry/utils" "5.5.0"
+    tslib "^1.9.3"
+
+"@sentry/hub@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.npm.taobao.org/@sentry/hub/download/@sentry/hub-5.5.0.tgz#6b8eecf769fa693260d45e771f4bca15bdbc6f4b"
+  integrity sha1-a47s92n6aTJg1F53H0vKFb28b0s=
+  dependencies:
+    "@sentry/types" "5.5.0"
+    "@sentry/utils" "5.5.0"
+    tslib "^1.9.3"
+
+"@sentry/minimal@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.npm.taobao.org/@sentry/minimal/download/@sentry/minimal-5.5.0.tgz#ea7939b8efe307d25775b23227a3f85dfb46b274"
+  integrity sha1-6nk5uO/jB9JXdbIyJ6P4XftGsnQ=
+  dependencies:
+    "@sentry/hub" "5.5.0"
+    "@sentry/types" "5.5.0"
+    tslib "^1.9.3"
+
+"@sentry/types@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.npm.taobao.org/@sentry/types/download/@sentry/types-5.5.0.tgz#0e7d8e8359c7af685258d92b23831072bb79f46a"
+  integrity sha1-Dn2Og1nHr2hSWNkrI4MQcrt59Go=
+
+"@sentry/utils@5.5.0":
+  version "5.5.0"
+  resolved "https://registry.npm.taobao.org/@sentry/utils/download/@sentry/utils-5.5.0.tgz#5c516be0568f4d462ad550c723b78e3ad7776c4e"
+  integrity sha1-XFFr4FaPTUYq1VDHI7eOOtd3bE4=
+  dependencies:
+    "@sentry/types" "5.5.0"
+    tslib "^1.9.3"
+
 "@svgr/babel-plugin-add-jsx-attribute@^4.2.0":
   version "4.2.0"
   resolved "https://registry.npm.taobao.org/@svgr/babel-plugin-add-jsx-attribute/download/@svgr/babel-plugin-add-jsx-attribute-4.2.0.tgz#dadcb6218503532d6884b210e7f3c502caaa44b1"
@@ -9925,7 +9977,7 @@ ts-pnp@1.1.2, ts-pnp@^1.0.0:
   resolved "https://registry.npm.taobao.org/ts-pnp/download/ts-pnp-1.1.2.tgz#be8e4bfce5d00f0f58e0666a82260c34a57af552"
   integrity sha1-vo5L/OXQDw9Y4GZqgiYMNKV69VI=
 
-tslib@^1.8.1, tslib@^1.9.0:
+tslib@^1.8.1, tslib@^1.9.0, tslib@^1.9.3:
   version "1.10.0"
   resolved "https://registry.npm.taobao.org/tslib/download/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
   integrity sha1-w8GflZc/sKYpc/sJ2Q2WHuQ+XIo=

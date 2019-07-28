@@ -9,7 +9,7 @@ interface IAddingTaskProps{
   addTaskAction:Function,
   projectId:string,
   setGlobalTasksByProjectId:Function,
-  onClick?:Function
+  onClick?:Function // for close modal 
 }
 
 class AddingTask extends React.Component<IAddingTaskProps,any>{

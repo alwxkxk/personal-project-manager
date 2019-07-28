@@ -20,17 +20,22 @@ import * as db from '../db'
 import store from './store';
 import moment from 'moment';
 
-// get all project data from indexedDB then update page
+// get all data from indexedDB then update page
 //@ts-ignore
-store.dispatch(getAllProjectsAction())
-//@ts-ignore
-store.dispatch(getAllTasksAction())
-//@ts-ignore
-store.dispatch(getGlobalSetupsAction())
-
+store.dispatch(init())
 
 export const addProjectAction = (projectInfo:any) => {
+  const projects = store.getState().projects
   const project = newProject(projectInfo);
+
+  // first project set in global project
+  if(projects.length === 0){
+    store.dispatch({
+      type:SET_GLOBAL_PROJECT,
+      payload:project
+    });
+  }
+
   db.saveProject(project);
   return ({
     type: ADD_PROJECT,
@@ -55,10 +60,24 @@ export function setProjectAction(project:IProject) {
 }
 
 export function deleteProjectAction(project:IProject) {
+  const global = store.getState().global
   const projects = store.getState().projects
   .filter((p:IProject)=>p.uuid !== project.uuid)
   .slice()
   db.deleteProject(project)
+  
+  // delete same project in global data
+  if(global && global.project && global.project.uuid === project.uuid){
+    store.dispatch({
+      type:SET_GLOBAL_TASKS,
+      payload:[]
+    })
+    store.dispatch({
+      type:SET_GLOBAL_PROJECT,
+      payload:{}
+    })
+  }
+
   return {
     type:DELETE_PROJECT,
     payload:projects
@@ -75,11 +94,24 @@ export const addTaskAction=(taskInfo:any)=>{
 }
 
 export function deleteTaskAction(task:ITask) {
-  let tasks = store.getState().tasks
+  const global = store.getState().global
+  const tasks = store.getState().tasks
     .filter((t:ITask)=>{
-      return t.uuid !== task.uuid
+      return t.uuid !== task.uuid;
     })
     .slice();
+
+  // delete same task in global data
+  if(global.project && global.project.uuid === task.projectId){
+    const ts = global.tasks.filter((t:ITask)=>{
+      return t.uuid !== task.uuid;
+    })
+    .slice()
+    store.dispatch({
+      type:SET_GLOBAL_TASKS,
+      payload:ts
+    })
+  }
     
   db.deleteTask(task);
 
@@ -110,29 +142,6 @@ export function setGlobalTasksByProjectId(projectId:string) {
   }
 }
 
-// async get all projects
-export function getAllProjectsAction(){
-  return (dispatch:any) => {
-      return db.getAllProjects()
-      .then( (arr)=>dispatch({
-        type:GET_ALL_PROJECTS,
-        payload:arr
-      }))
-      .catch((err:any)=>console.error(err))
-  }
-}
-
-export function getAllTasksAction() {
-  return (dispatch:any) => {
-    return db.getAllTasks()
-    .then( (arr)=>dispatch({
-      type:GET_ALL_TASKS,
-      payload:arr
-    }))
-    .catch((err:any)=>console.error(err))
-} 
-}
-
 export function setNavbarTitle(title:string) {
   return {
     type:SET_NAVBAR_TITLE,
@@ -141,14 +150,14 @@ export function setNavbarTitle(title:string) {
 }
 
 export function setTask(task:ITask) {
-  let tasks = store.getState().tasks.slice();
+  const tasks = store.getState().tasks.slice();
   tasks.forEach( (t:ITask) => {
     if(t.uuid === task.uuid){
-      Object.assign(t,task)
+      Object.assign(t,task,{updateTime:moment().format()})
     }
     db.updateTask(t);
   });
-
+  // note: it will update same task in global.tasks
   return {
     type:SET_TASK,
     payload:tasks
@@ -164,14 +173,45 @@ export function setGlobalSetups(setups:ISetups) {
   }
 }
 
-export function getGlobalSetupsAction() {
-  return (dispatch:any) => {
-    return db.getSetups()
-    .then( (arr)=>dispatch({
-      type:GET_GLOBAL_SETUPS,
-      payload:arr[0] || {}
-    }))
-    .catch((err:any)=>console.error(err))
-}
-}
 
+function init() {
+  return (dispatch:any)=>{
+
+
+    return Promise.all([
+      db.getAllProjects(),
+      db.getAllTasks(),
+      db.getSetups()
+    ])
+    .then((values:any[])=>{
+      // console.log('init:',values)
+      // get all data
+      dispatch({
+        type:GET_ALL_PROJECTS,
+        payload:values[0]
+      })
+      dispatch({
+        type:GET_ALL_TASKS,
+        payload:values[1]
+      })
+      dispatch({
+        type:GET_GLOBAL_SETUPS,
+        payload:values[2][0]
+      })
+
+      //set the last project as global
+      const lastProject = values[0].sort( (a:IProject,b:IProject)=>{
+          // @ts-ignore
+          return new Date(b.createTime) - new Date(a.createTime);
+        })[0]
+      if(lastProject){
+        dispatch(setGlobalProject(lastProject));
+        dispatch(setGlobalTasksByProjectId(lastProject.uuid));
+      }
+
+    })
+    .catch((err:any)=>{
+      console.log(err)
+    })
+  }
+}

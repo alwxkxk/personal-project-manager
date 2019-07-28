@@ -23,9 +23,6 @@ interface IAddingTaskProps{
 }
 
 class SettingTaskCommon extends React.PureComponent<IAddingTaskProps> {
-  constructor(props:IAddingTaskProps) {
-    super(props)
-  }
 
   render(){
     return (
