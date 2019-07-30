@@ -169,7 +169,7 @@
 
 /*github color Less --> More: #ebedf0 #c6e48b #7bc96f #239a3b #196127 */
 .background-color-0{
-  background-color: #ebedf0;
+  background-color: #ebedf0 !important;
 }
 
 .border-color-1{
@@ -177,7 +177,7 @@
 }
 
 .background-color-1{
-  background-color: #c6e48b;
+  background-color: #c6e48b !important;
 }
 
 .border-color-2{
@@ -185,7 +185,7 @@
 }
 
 .background-color-2{
-  background-color: #7bc96f;
+  background-color: #7bc96f !important;
 }
 
 .border-color-3{
@@ -193,7 +193,7 @@
 }
 
 .background-color-3{
-  background-color: #239a3b;
+  background-color: #239a3b !important;
 }
 
 .border-color-4{

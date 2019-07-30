@@ -61,7 +61,6 @@ class Home extends React.Component<any,any> {
           
           <TaskList
             hideDelete={true}
-            hideComplete={true}
           ></TaskList>
           
           <Modal

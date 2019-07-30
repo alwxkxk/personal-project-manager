@@ -88,36 +88,6 @@ export const addTaskAction=(taskInfo:any)=>{
   })
 }
 
-// export function deleteTaskAction(task:ITask) {
-
-//   // const global = store.getState().global
-//   // const tasks = store.getState().tasks
-//   //   .filter((t:ITask)=>{
-//   //     return t.uuid !== task.uuid;
-//   //   })
-//   //   .slice();
-
-//   // // delete same task in global data
-//   // if(global.project && global.project.uuid === task.projectId){
-//   //   const ts = global.tasks.filter((t:ITask)=>{
-//   //     return t.uuid !== task.uuid;
-//   //   })
-//   //   .slice()
-//   //   store.dispatch({
-//   //     type:SET_GLOBAL_TASKS,
-//   //     payload:ts
-//   //   })
-//   // }
-    
-//   // db.deleteTask(task);
-
-//   return {
-//     type:DELETE_TASK,
-//     payload:tasks
-//   }
-// }
-// TODO: restore task
-
 export function setGlobalProject(project:IProject) {
   return {
     type:SET_GLOBAL_PROJECT,
@@ -212,8 +182,8 @@ function init() {
         payload:values[2][0]
       })
 
-      //set the last project as global
-      const lastProject = values[0].sort( (a:IProject,b:IProject)=>{
+      //set the last active project as global
+      const lastProject = values[0].filter((p:IProject)=> !p.delete).sort( (a:IProject,b:IProject)=>{
           // @ts-ignore
           return new Date(b.createTime) - new Date(a.createTime);
         })[0]
