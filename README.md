@@ -4,4 +4,3 @@
 
 ## 部署
 - 复制`.env.example` 并改名 `.env`，设置对应的环境变量。
-- 若部署到二级域名需要在`package.json`添加`"homepage": "your-site.com/sub/"`

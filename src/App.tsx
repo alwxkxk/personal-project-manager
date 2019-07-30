@@ -1,5 +1,5 @@
 import React from 'react';
-import {NavBar, Drawer, List}  from 'antd-mobile';
+import {NavBar, Drawer, List, Toast}  from 'antd-mobile';
 import Projects from './pages/projects/Projects';
 import Home from './pages/home/Home';
 import './App.css';
@@ -33,10 +33,16 @@ const sidebar = (
 class App extends React.Component<any> {
   state = {
     open: false,
-    back:false
   }
+
   onOpenChange = () => {
     this.setState({ open: !this.state.open });
+  }
+
+  componentDidMount(){
+    if(window.innerWidth>768){
+      Toast.fail("暂时只支持小屏设备，将会出现样式异常。",10)
+    }
   }
 
 
