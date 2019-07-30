@@ -3,6 +3,7 @@
 interface IItem{
   createTime:string,
   completeTime:string,
+  delete:boolean,
   desc:string,
   updateTime:string,
   uuid:string, // uuid

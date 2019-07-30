@@ -123,12 +123,37 @@
   color:white;
 }
 
+.text-gray{
+  color:gray;
+}
+
+.tasks-nav{
+  margin: 1rem;
+}
+
 .space-between{
   justify-content: space-between;
 }
 
+.project-inactive{
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid rgb(166, 166, 166);
+}
+
+.project-inactive .title{
+  color: rgb(166, 166, 166);
+  font-size: 1rem;
+  font-weight: 600;
+  margin:0.25rem;
+}
+
 .background-color-white{
   background-color: white;
+}
+
+.background-color-gray{
+  background-color: gray !important;
 }
 
 .circle-btn{

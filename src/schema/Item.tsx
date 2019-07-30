@@ -7,6 +7,7 @@ export enum itemType{
 export const Item:IItem = {
   createTime:'',
   completeTime:'',
+  delete:false,
   desc:'',
   updateTime:'',
   uuid:'',

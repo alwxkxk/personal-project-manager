@@ -2,13 +2,13 @@ import React from 'react';
 import SettingTaskCommon from './SettingTaskCommon';
 import { Button, Flex, DatePicker, List } from 'antd-mobile';
 import { connect } from "react-redux";
-import {deleteTaskAction,setGlobalTasksByProjectId,setTask} from "../redux/actions";
+import {setTask,deleteTaskAction,restoreTaskAction} from "../redux/actions";
 import moment from 'moment';
 
 interface ISettingTaskProps{
-  task:ITask,
   deleteTaskAction:Function,
-  setGlobalTasksByProjectId:Function,
+  task:ITask,
+  restoreTaskAction:Function,
   setTask:Function,
   onClick?:Function // for closeModal
 }
@@ -36,15 +36,31 @@ class SettingTask extends React.Component<ISettingTaskProps,any>{
     }
   }
 
-  deleteTask(){
+  deleteTask=()=>{
     this.props.deleteTaskAction(this.props.task)
-    this.props.setGlobalTasksByProjectId(this.props.task.projectId)
     if(this.props.onClick){
       this.props.onClick()
     }
   }
 
+  restoreTask=()=>{
+    this.props.restoreTaskAction(this.props.task)
+    if(this.props.onClick){
+      this.props.onClick()
+    }
+  }
+
+
+
   render(){
+    let deleteOrRestoreElement:any;
+    if(this.props.task.delete){
+      deleteOrRestoreElement = <Button type="primary" onClick={this.restoreTask}>恢复任务</Button>
+    }
+    else{
+      deleteOrRestoreElement = <Button type="warning" onClick={this.deleteTask}>删除任务</Button>
+    }
+
     return (
       <div>
         <SettingTaskCommon
@@ -77,7 +93,7 @@ class SettingTask extends React.Component<ISettingTaskProps,any>{
             <Button type="primary" onClick={()=>this.saveTask()}>保存更新</Button>
           </Flex.Item>
           <Flex.Item>
-          <Button type="warning" onClick={()=>this.deleteTask()}>删除任务</Button>
+            {deleteOrRestoreElement}
           </Flex.Item>
         </Flex>
 
@@ -90,5 +106,5 @@ class SettingTask extends React.Component<ISettingTaskProps,any>{
 
 export default connect(
   null,
-  { deleteTaskAction,setGlobalTasksByProjectId,setTask }
+  { setTask,deleteTaskAction,restoreTaskAction }
 )(SettingTask);

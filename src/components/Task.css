@@ -32,6 +32,7 @@
 .task .content .desc{
   font-size: 0.8rem;
   text-align: left;
+  margin-top: 5px;
 }
 
 .task .am-list-item{

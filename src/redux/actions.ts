@@ -11,7 +11,9 @@ import {
   SET_GLOBAL_SETUPS,
   GET_GLOBAL_SETUPS,
   SET_PROJECT,
-  DELETE_PROJECT
+  DELETE_PROJECT,
+  RESTORE_TASK,
+  RESTORE_PROJECT
 } from './actionTypes';
 
 import {newProject} from '../schema/Project';
@@ -44,45 +46,38 @@ export const addProjectAction = (projectInfo:any) => {
 }
 
 
-export function setProjectAction(project:IProject) {
+export function setProjectAction(project:IProject,actionTypes?:string) {
   const projects = store.getState().projects.slice();
-  project.updateTime = moment().format();
-  projects.forEach((p:IProject)=>{
-    if(p.uuid === project.uuid){
-      Object.assign(p,project)
-    }
-  })
+  const oldProject = projects.find((p:IProject)=> p.uuid === project.uuid);
+  if(oldProject){
+    Object.assign(
+      oldProject,
+      project,
+      {updateTime:moment().format()}
+      )
+  }
   db.saveProject(project);
   return {
-    type:SET_PROJECT,
+    type:actionTypes || SET_PROJECT,
     payload:projects
   }
 }
 
 export function deleteProjectAction(project:IProject) {
-  const global = store.getState().global
-  const projects = store.getState().projects
-  .filter((p:IProject)=>p.uuid !== project.uuid)
-  .slice()
-  db.deleteProject(project)
-  
-  // delete same project in global data
-  if(global && global.project && global.project.uuid === project.uuid){
-    store.dispatch({
-      type:SET_GLOBAL_TASKS,
-      payload:[]
-    })
-    store.dispatch({
-      type:SET_GLOBAL_PROJECT,
-      payload:{}
-    })
-  }
 
-  return {
-    type:DELETE_PROJECT,
-    payload:projects
-  }
+  return setProjectAction({
+    ...project,
+    delete:true
+  },DELETE_PROJECT)
 }
+
+export function restoreProjectAction(project:IProject){
+  return setProjectAction({
+    ...project,
+    delete:false
+  },RESTORE_PROJECT)
+}
+
 
 export const addTaskAction=(taskInfo:any)=>{
   const task = newTask(taskInfo);
@@ -93,33 +88,35 @@ export const addTaskAction=(taskInfo:any)=>{
   })
 }
 
-export function deleteTaskAction(task:ITask) {
-  const global = store.getState().global
-  const tasks = store.getState().tasks
-    .filter((t:ITask)=>{
-      return t.uuid !== task.uuid;
-    })
-    .slice();
+// export function deleteTaskAction(task:ITask) {
 
-  // delete same task in global data
-  if(global.project && global.project.uuid === task.projectId){
-    const ts = global.tasks.filter((t:ITask)=>{
-      return t.uuid !== task.uuid;
-    })
-    .slice()
-    store.dispatch({
-      type:SET_GLOBAL_TASKS,
-      payload:ts
-    })
-  }
+//   // const global = store.getState().global
+//   // const tasks = store.getState().tasks
+//   //   .filter((t:ITask)=>{
+//   //     return t.uuid !== task.uuid;
+//   //   })
+//   //   .slice();
+
+//   // // delete same task in global data
+//   // if(global.project && global.project.uuid === task.projectId){
+//   //   const ts = global.tasks.filter((t:ITask)=>{
+//   //     return t.uuid !== task.uuid;
+//   //   })
+//   //   .slice()
+//   //   store.dispatch({
+//   //     type:SET_GLOBAL_TASKS,
+//   //     payload:ts
+//   //   })
+//   // }
     
-  db.deleteTask(task);
+//   // db.deleteTask(task);
 
-  return {
-    type:DELETE_TASK,
-    payload:tasks
-  }
-}
+//   return {
+//     type:DELETE_TASK,
+//     payload:tasks
+//   }
+// }
+// TODO: restore task
 
 export function setGlobalProject(project:IProject) {
   return {
@@ -149,20 +146,36 @@ export function setNavbarTitle(title:string) {
   }
 }
 
-export function setTask(task:ITask) {
+export function setTask(task:ITask,actionTypes?:string) {
   const tasks = store.getState().tasks.slice();
-  tasks.forEach( (t:ITask) => {
-    if(t.uuid === task.uuid){
-      Object.assign(t,task,{updateTime:moment().format()})
-    }
-    db.updateTask(t);
-  });
-  // note: it will update same task in global.tasks
-  return {
-    type:SET_TASK,
-    payload:tasks
+  const oldTask = tasks.find((t:ITask)=> t.uuid === task.uuid)
+  if(oldTask){
+    Object.assign(
+      oldTask,
+      task,
+      {updateTime:moment().format()}
+    )
+    db.updateTask(oldTask);
   }
 
+  return {
+    type:actionTypes || SET_TASK,
+    payload:tasks
+  }
+}
+
+export function deleteTaskAction(task:ITask) {
+  return setTask({
+    ...task,
+    delete:true
+  },DELETE_TASK)
+}
+
+export function restoreTaskAction(task:ITask) {
+  return setTask({
+    ...task,
+    delete:false
+  },RESTORE_TASK)
 }
 
 export function setGlobalSetups(setups:ISetups) {

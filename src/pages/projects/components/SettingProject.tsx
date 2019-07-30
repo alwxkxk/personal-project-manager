@@ -2,12 +2,13 @@ import React from 'react';
 import {Flex, Button } from 'antd-mobile';
 import SettingProjectCommon from './SettingProjectCommon';
 import { connect } from "react-redux";
-import {setProjectAction,deleteProjectAction} from "../../../redux/actions"
+import {setProjectAction,deleteProjectAction,restoreProjectAction} from "../../../redux/actions"
 
 interface ISettingProject {
   project:IProject,
   setProjectAction:Function,
   deleteProjectAction:Function,
+  restoreProjectAction:Function,
   onClick?:Function
 }
 
@@ -22,7 +23,7 @@ class SettingProject extends React.Component<ISettingProject,any> {
     }
   }
 
-  saveProject(){
+  saveProject=()=>{
     this.props.setProjectAction({
       ...this.props.project,
       ...this.state
@@ -33,10 +34,17 @@ class SettingProject extends React.Component<ISettingProject,any> {
     }
   }
 
-  deleteProject(){
-    this.props.deleteProjectAction(this.props.project)
+  deleteProject=()=>{
+    this.props.deleteProjectAction(this.props.project);
     if(this.props.onClick){
       this.props.onClick()
+    }
+  }
+
+  restoreProject=()=>{
+    this.props.restoreProjectAction(this.props.project);
+    if(this.props.onClick){
+      this.props.onClick();
     }
   }
 
@@ -47,6 +55,14 @@ class SettingProject extends React.Component<ISettingProject,any> {
   }
 
   render(){
+    let deleteOrRestoreElement:any;
+    if(this.props.project.delete){
+      deleteOrRestoreElement = <Button type="primary" onClick={this.restoreProject}>恢复项目</Button>
+    }
+    else{
+      deleteOrRestoreElement = <Button type="warning" onClick={this.deleteProject}>删除项目</Button>
+    }
+
     return (
       <div >
         <SettingProjectCommon
@@ -60,10 +76,10 @@ class SettingProject extends React.Component<ISettingProject,any> {
 
         <Flex>
           <Flex.Item>
-            <Button type="primary" onClick={()=>this.saveProject()}>保存更新</Button>
+            <Button type="primary" onClick={this.saveProject}>保存更新</Button>
           </Flex.Item>
           <Flex.Item>
-          <Button type="warning" onClick={()=>this.deleteProject()}>删除项目</Button>
+            {deleteOrRestoreElement}
           </Flex.Item>
         </Flex>
 
@@ -76,5 +92,5 @@ class SettingProject extends React.Component<ISettingProject,any> {
 
 export default connect(
   null,
-  { setProjectAction,deleteProjectAction }
+  { setProjectAction,deleteProjectAction,restoreProjectAction }
 )(SettingProject);

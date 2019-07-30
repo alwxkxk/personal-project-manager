@@ -30,7 +30,8 @@ class Home extends React.Component<any,any> {
     }
 
     // show the last project
-    let lastProject = this.props.projects && this.props.projects.sort(sortByCreateTime)[0]
+    let lastProject = this.props.projects && 
+      this.props.projects.filter((p:IProject)=> !p.delete).sort(sortByCreateTime)[0]
     if(lastProject && this.props.global.project && this.props.global.project.uuid !== lastProject.uuid){
       this.props.setGlobalProject(lastProject);
       this.props.setGlobalTasksByProjectId(lastProject.uuid);
@@ -58,7 +59,10 @@ class Home extends React.Component<any,any> {
           <FloatingActionButton onClick={this.openModal}></FloatingActionButton>
           <ProjectState></ProjectState>
           
-          <TaskList></TaskList>
+          <TaskList
+            hideDelete={true}
+            hideComplete={true}
+          ></TaskList>
           
           <Modal
             visible={this.state.modal}
