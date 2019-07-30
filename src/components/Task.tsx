@@ -39,22 +39,40 @@ class Task extends React.Component<ITaskProps,any>{
 
   render(){
     const task = this.props.task || {}
-
+    let tipBoxColor;
     let activeFlag = true;
     if(task.delete || task.complete){
       activeFlag = false;
     }
+
+    switch (task.workload) {
+      case 1:
+        tipBoxColor = "background-color-1"
+        break;
+      case 2:
+        tipBoxColor = "background-color-2"
+        break;
+      case 3:
+        tipBoxColor = "background-color-3"
+        break;
+      case 4:
+        tipBoxColor = "background-color-4"
+        break;    
+      default:
+        break;
+    }
+   
 
     return (
       <div className="task">
       <WhiteSpace/>
         <WingBlank size="lg">
           <div className="flex item">
-            <div className={`tip-box ${activeFlag?'':'background-color-gray'}`}></div>
+            <div className={`tip-box ${tipBoxColor} ${activeFlag?'':'background-color-gray'}`}></div>
             <div className={`flex content ${activeFlag?'text-white':'text-gray'} full`}>
               <div className="flex space-between">
                 <div className="title " onClick={this.openModal} >{task.title || '未命名'}</div>
-                
+
                 {
                   !task.delete && 
                   <CheckboxItem 

@@ -14,7 +14,7 @@ const mapStateToProps = (state:any) => {
 
 const sortByUpdateTime = (a:ITask,b:ITask)=>{
   //@ts-ignore
-  return new Date(a.updateTime) - new Date(b.updateTime)
+  return new Date(b.updateTime) - new Date(a.updateTime)
 }
 
 const generateElement= (ts:ITask[],navText:string)=>{
