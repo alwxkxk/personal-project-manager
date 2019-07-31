@@ -21,12 +21,13 @@ const generateElement= (ts:ITask[],navText:string)=>{
   if(ts.length > 0){
     return (
       <div>
-        <div className="tasks-nav">{navText}:{ts.length}</div>
+        <div className="tasks-nav emerge">{navText}:{ts.length}</div>
         {
-          ts.map((t:ITask)=>{
+          ts.map((t:ITask,index:number)=>{
           return <Task 
             key={t.uuid} 
             task={t}
+            style={{animationDelay:`${index}00ms`}}
             > </Task>
           })
         }

@@ -205,4 +205,55 @@
   background-color: #196127;
 }
 
+/* css animation */
+@keyframes emerge{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+.emerge{
+  animation-name: emerge;
+  animation-duration: 1.5s;
+}
+
+
+@keyframes slide-in {
+  from {
+    margin-left: 100%;
+    width: 300%; 
+    opacity: 0; 
+  }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1; 
+  }
+}
+
+.slide-in{
+  animation-duration: 1.5s;
+  animation-name: slide-in;
+  animation-fill-mode: backwards!important;
+}
+
+@keyframes fly-in{
+  from{
+    opacity: 0;
+    margin-top:100vh;
+  }
+  to{
+    opacity: 1;
+    margin-top:0;
+  }
+}
+
+.fly-in{
+  animation-name: fly-in;
+  animation-duration: 1.5s;
+}
 

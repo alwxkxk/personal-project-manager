@@ -28,7 +28,7 @@ class Setup extends React.PureComponent<any,any> {
     return (
       <div className="page setup"> 
         <WingBlank>
-          <List>
+          <List className="emerge">
             <List.Item
               extra={
                 //@ts-ignore

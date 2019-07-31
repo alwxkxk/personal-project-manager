@@ -134,7 +134,7 @@ class ProjectList extends React.Component<any,any> {
     
     
     return (
-      <div>
+      <div className="fly-in">
         {activeProjectsList}
         {generateElement(completeProjects,"已完成")}
         {generateElement(deleteProjects,"回收箱")}

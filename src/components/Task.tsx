@@ -1,6 +1,6 @@
 import React from 'react';
 import "./Task.css";
-import { WhiteSpace, WingBlank,Checkbox, Modal } from 'antd-mobile';
+import { WhiteSpace, WingBlank,Checkbox, Modal, Toast } from 'antd-mobile';
 import SettingTask from './SettingTask';
 import {connect} from 'react-redux';
 import {setTask} from '../redux/actions';
@@ -10,6 +10,8 @@ const CheckboxItem = Checkbox.CheckboxItem;
 interface ITaskProps{
   task:ITask,
   setTask:Function,
+  className?:String,
+  style?:any
 }
 
 class Task extends React.Component<ITaskProps,any>{
@@ -30,6 +32,9 @@ class Task extends React.Component<ITaskProps,any>{
 
   handleSwitchClick=(e:any)=>{
   const checked = e.target.checked;
+  if(checked){
+    Toast.success("完成任务");
+  }
    this.props.setTask({
      ...this.props.task,
       complete:checked,
@@ -64,7 +69,7 @@ class Task extends React.Component<ITaskProps,any>{
    
 
     return (
-      <div className="task">
+      <div className={`task slide-in ${this.props.className}`} style={this.props.style}>
       <WhiteSpace/>
         <WingBlank size="lg">
           <div className="flex item">
