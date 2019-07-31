@@ -1,4 +1,4 @@
-基于react,redux构建的个人项目管理工具，仍在开发中。
+基于react,redux构建的个人项目管理工具，仍在开发中，暂时仅支持移动端小屏显示。
 
 - [设计及技术文档](https://github.com/alwxkxk/personal-project-manager/wiki/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3)
 
