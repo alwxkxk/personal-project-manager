@@ -1,3 +1,6 @@
+.setup {
+  padding-top:10px;
+}
 .setup .am-list-content{
   color:white !important;
 }
@@ -8,4 +11,17 @@
 
 .setup .am-stepper-input{
   color:white;
+}
+
+.setup .avatar-img{
+  width: 5rem;
+  height: 5rem;
+  margin: 2rem auto 0.5rem auto;
+  border-radius: 50%;
+}
+
+.setup .name{
+  color: white;
+  font-size: 1rem;
+  margin:0.5rem auto 1rem auto;
 }

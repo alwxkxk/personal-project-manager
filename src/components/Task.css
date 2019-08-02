@@ -44,3 +44,7 @@
   background-color: #2E374F;
   min-height: 0;
 }
+
+.item .background-color-gray{
+  background-color: gray !important;
+}

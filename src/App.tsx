@@ -8,6 +8,9 @@ import Project from './pages/project/Project';
 import { connect } from "react-redux";
 import Setup from './pages/setup/Setup';
 import navIcon from "./img/nav_icon.svg"
+import Oauth from './pages/oauth/Oauth';
+
+
 
 const mapStateToProps = (state:any) => {
   const {global} = state;
@@ -21,10 +24,10 @@ const sidebar = (
       <Link to="/"><div className="nav-circle nav-color-1"></div>首页</Link>
     </List.Item>
     <List.Item>
-      <Link to="/Projects"><div className="nav-circle nav-color-2"></div>所有项目</Link>
+      <Link to="/projects"><div className="nav-circle nav-color-2"></div>所有项目</Link>
     </List.Item>
     <List.Item>
-      <Link to="/Setup"><div className="nav-circle nav-color-3"></div>设置</Link>
+      <Link to="/setup"><div className="nav-circle nav-color-3"></div>设置</Link>
     </List.Item>
   </List>
 )
@@ -43,6 +46,18 @@ class App extends React.Component<any> {
     if(window.innerWidth>768){
       Toast.fail("暂时只支持小屏设备，将会出现样式异常。",10)
     }
+    // testSave()
+    // testAddUser('16029024','ec0ce012ab866d7f1b3e1c6a3ef1aec4b6f53118')
+    // testAddUserByAnonymous("alwqwe")
+    // loginByAnonymous("alwqwe")
+
+    // if(Parse.User.current()){
+    //   testCloudFunction()
+    // }
+    // else{
+    //   loginByGithub('16029024','ec0ce012ab866d7f1b3e1c6a3ef1aec4b6f53118')
+    //   .then(()=>testCloudFunction())
+    // }
   }
 
   render(){
@@ -67,9 +82,10 @@ class App extends React.Component<any> {
           >
             <Route path="/" exact component={Home} />
             <Route path="/index" component={Home} />
-            <Route path="/Project/" component={Project} />  
-            <Route path="/Projects/" component={Projects} />  
-            <Route path="/Setup/" component={Setup} />  
+            <Route path="/project/" component={Project} />  
+            <Route path="/projects/" component={Projects} />  
+            <Route path="/setup/" component={Setup} />  
+            <Route path="/oauth/" component={Oauth} />  
           </Drawer>
         </Router>
     );

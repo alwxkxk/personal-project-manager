@@ -17,7 +17,7 @@ class FloatingActionButton extends React.Component<FloatingActionButtonProps> {
       style={{
         position:'fixed',
         bottom:'1rem',
-        right:'1rem',
+        right:window.innerWidth>768?window.innerWidth-758:'1rem',
         width:'2.5rem',
         height:'2.5rem',
         borderRadius:'50%',

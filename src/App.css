@@ -73,8 +73,18 @@
   background: rgb(142, 197, 67);
 }
 
-.am-modal-transparent{
-  width:80vw !important;
+@media (max-width: 330px){
+  .am-modal-transparent{
+    width:100vw !important;
+  }
+}
+
+
+@media (min-width: 330px){
+  .am-modal-transparent{
+    width:80vw !important;
+    max-width: 768px;
+  }
 }
 
 .am-list-content a{
@@ -163,9 +173,6 @@
   margin:0.1rem;
 }
 
-.am-modal-transparent{
-  width: 96vw !important;
-}
 
 /*github color Less --> More: #ebedf0 #c6e48b #7bc96f #239a3b #196127 */
 .background-color-0{

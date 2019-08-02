@@ -27,7 +27,7 @@ const generateElement= (ts:ITask[],navText:string)=>{
           return <Task 
             key={t.uuid} 
             task={t}
-            style={{animationDelay:`${index}00ms`}}
+            style={{animationDelay:`${index<6?index:6}00ms`}}
             > </Task>
           })
         }

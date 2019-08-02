@@ -4,6 +4,8 @@ import {
   SET_GLOBAL_TASKS,
   SET_GLOBAL_SETUPS,
   GET_GLOBAL_SETUPS,
+  SET_GLOBAL_USER,
+  GET_GLOBAL_USER,
 } from "../actionTypes";
 
 const initState:any= {
@@ -12,7 +14,8 @@ const initState:any= {
   tasks:[],
   setups:{
     workTime:2
-  }
+  },
+  user:{}
 }
 
 export default function(state:any=initState, action:any) {
@@ -22,6 +25,13 @@ export default function(state:any=initState, action:any) {
       return {
         ...state,
         navTitle:action.payload
+      };
+
+    case SET_GLOBAL_USER:
+    case GET_GLOBAL_USER:
+      return  {
+        ...state,
+        user:action.payload || {}
       };
 
     case SET_GLOBAL_PROJECT:

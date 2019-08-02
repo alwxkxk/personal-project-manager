@@ -7,7 +7,7 @@ import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
 import store from "./redux/store";
 
-if(process.env.REACT_APP_SENTRY){
+if(process.env.REACT_APP_SENTRY && process.env.NODE_ENV === 'production'){
   Sentry.init({dsn: process.env.REACT_APP_SENTRY});
 }
 

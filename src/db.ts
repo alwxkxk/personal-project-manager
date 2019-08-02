@@ -5,7 +5,8 @@ const db:any = new Dexie("PersonalProjectManager");
 db.version(1).stores({
   projects: "&uuid,updateTime",
   tasks:'&uuid,updateTime',
-  setups:"&name"
+  setups:"&name",
+  user:"&uuid"
 });
 
 
@@ -46,6 +47,18 @@ export function updateSetups(setups:ISetups) {
   })
 }
 
+export function updateUser(user:any) {
+  return db.user.put({
+    ...user,
+    uuid:"1",// only one user
+    updateTime:moment().format()
+  })
+}
+
 export function getSetups():Promise<ISetups[]>{
   return db.setups.toArray();
+}
+
+export function getUser():Promise<any[]> {
+  return db.user.toArray();
 }

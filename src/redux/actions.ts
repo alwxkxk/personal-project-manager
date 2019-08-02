@@ -13,7 +13,9 @@ import {
   SET_PROJECT,
   DELETE_PROJECT,
   RESTORE_TASK,
-  RESTORE_PROJECT
+  RESTORE_PROJECT,
+  SET_GLOBAL_USER,
+  GET_GLOBAL_USER
 } from './actionTypes';
 
 import {newProject} from '../schema/Project';
@@ -85,6 +87,19 @@ export const addTaskAction=(taskInfo:any)=>{
   return({
     type:ADD_TASK,
     payload:task
+  })
+}
+
+export function setGlobalUser(user:any) {
+  const userInfo = {
+    githubId:user.id,
+    name:user.name,
+    avatar_url:user.avatar_url
+  }
+  db.updateUser(userInfo)
+  return ({
+    type:SET_GLOBAL_USER,
+    payload:userInfo
   })
 }
 
@@ -164,7 +179,8 @@ function init() {
     return Promise.all([
       db.getAllProjects(),
       db.getAllTasks(),
-      db.getSetups()
+      db.getSetups(),
+      db.getUser()
     ])
     .then((values:any[])=>{
       // console.log('init:',values)
@@ -180,6 +196,10 @@ function init() {
       dispatch({
         type:GET_GLOBAL_SETUPS,
         payload:values[2][0]
+      })
+      dispatch({
+        type:GET_GLOBAL_USER,
+        payload:values[3][0]
       })
 
       //set the last active project as global

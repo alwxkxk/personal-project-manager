@@ -60,7 +60,7 @@ class ProjectList extends React.Component<any,any> {
             <Card>
                 <Card.Header
                   title={
-                    <Link to={`/Project/${p.uuid}`} onClick={()=>this.handleClick(p)}>
+                    <Link to={`/project/${p.uuid}`} onClick={()=>this.handleClick(p)}>
                       <div>{p.title}</div>
                     </Link>
                   }
@@ -104,7 +104,7 @@ class ProjectList extends React.Component<any,any> {
                 <WhiteSpace size="sm" />
                 <div className="project-inactive">
                   <div>
-                    <Link to={`/Project/${p.uuid}`} onClick={()=>this.handleClick(p)}>
+                    <Link to={`/project/${p.uuid}`} onClick={()=>this.handleClick(p)}>
                       <div className="title">{p.title}</div>
                     </Link>
                   </div>
