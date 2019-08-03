@@ -31,7 +31,7 @@ class Oauth extends React.PureComponent<any,any> {
     // TODO: refactor by await
     if(code){
       //take token from server
-      getGithubToken(code,true)
+      getGithubToken(code)
       .then((token:string)=>{
         if(token){
           // get github user info 

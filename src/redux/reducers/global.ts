@@ -13,7 +13,8 @@ const initState:any= {
   project:null,
   tasks:[],
   setups:{
-    workTime:2
+    workTime:2,
+    backupTime:''
   },
   user:{}
 }
@@ -53,12 +54,10 @@ export default function(state:any=initState, action:any) {
       }
     case GET_GLOBAL_SETUPS:
       let result = action.payload || {}
-      if( ! result.workTime){
-        result.workTime = 2
-      }
       return {
         ...state,
         setups:{
+          ...state.setups,
           ...result
         }
         

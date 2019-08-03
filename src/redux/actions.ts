@@ -51,17 +51,25 @@ export const addProjectAction = (projectInfo:any) => {
 export function setProjectAction(project:IProject,actionTypes?:string) {
   const projects = store.getState().projects.slice();
   const oldProject = projects.find((p:IProject)=> p.uuid === project.uuid);
+  db.saveProject(project);
   if(oldProject){
+    // update
     Object.assign(
       oldProject,
       project,
       {updateTime:moment().format()}
-      )
+    )
+    return {
+      type:actionTypes || SET_PROJECT,
+      payload:projects
+    }
   }
-  db.saveProject(project);
-  return {
-    type:actionTypes || SET_PROJECT,
-    payload:projects
+  else{
+    // creat
+    return ({
+      type: ADD_PROJECT,
+      payload: project
+    });
   }
 }
 
@@ -135,18 +143,27 @@ export function setTask(task:ITask,actionTypes?:string) {
   const tasks = store.getState().tasks.slice();
   const oldTask = tasks.find((t:ITask)=> t.uuid === task.uuid)
   if(oldTask){
+    // update
     Object.assign(
       oldTask,
       task,
       {updateTime:moment().format()}
     )
     db.updateTask(oldTask);
+    return {
+      type:actionTypes || SET_TASK,
+      payload:tasks
+    }
+  }
+  else{
+    // create
+    db.saveTask(task)
+    return({
+      type:ADD_TASK,
+      payload:task
+    })
   }
 
-  return {
-    type:actionTypes || SET_TASK,
-    payload:tasks
-  }
 }
 
 export function deleteTaskAction(task:ITask) {
