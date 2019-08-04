@@ -77,6 +77,10 @@
   background: rgb(142, 197, 67);
 }
 
+.nav-active{
+  background-color: rgba(46,55,79,0.8) !important;
+}
+
 @media (max-width: 330px){
   .am-modal-transparent{
     width:100vw !important;
@@ -89,6 +93,10 @@
     width:80vw !important;
     max-width: 768px;
   }
+}
+
+.am-list-item .am-list-line .am-list-content{
+  padding-left: 2rem;
 }
 
 .am-list-content a{

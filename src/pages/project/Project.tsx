@@ -5,7 +5,7 @@ import AddingTask from '../../components/AddingTask';
 import {setNavbarTitle} from "../../redux/actions";
 import { connect } from "react-redux";
 import TaskList from '../../components/TaskLIst';
-import ProjectState from '../../components/ProjectState';
+// import ProjectState from '../../components/ProjectState';
 
 const mapStateToProps = (state:any) => {
   const {project} = state.global;
@@ -37,7 +37,7 @@ class Project extends React.Component<any,{modal:boolean}>{
     return (
       <div className="page">
 
-        <ProjectState></ProjectState>
+        {/* <ProjectState></ProjectState> */}
         <TaskList></TaskList>
         <FloatingActionButton onClick={()=>this.setState({modal:true})}></FloatingActionButton>
 

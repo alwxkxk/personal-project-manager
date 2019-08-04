@@ -35,17 +35,19 @@ class SettingProject extends React.Component<ISettingProject,any> {
   }
 
   deleteProject=()=>{
-    this.props.deleteProjectAction(this.props.project);
+    
     if(this.props.onClick){
       this.props.onClick()
     }
+    this.props.deleteProjectAction(this.props.project);
   }
 
   restoreProject=()=>{
-    this.props.restoreProjectAction(this.props.project);
+    
     if(this.props.onClick){
       this.props.onClick();
     }
+    this.props.restoreProjectAction(this.props.project);
   }
 
   onChange(key:string,value:any){

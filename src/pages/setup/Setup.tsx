@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { Stepper, List, WingBlank, ActionSheet, Toast } from "antd-mobile";
+import { WingBlank, ActionSheet, Toast } from "antd-mobile";
 import {setNavbarTitle,setGlobalSetups, setGlobalUser, setTask, setProjectAction} from "../../redux/actions";
 import logo from "../../img/logo.png";
 import './Setup.css';
@@ -8,6 +8,8 @@ import { userAvailable, fetchFromServer, pushToServer } from "../../parse-server
 import Parse from "parse";
 import store from "../../redux/store";
 import moment from "moment";
+import plusIcon from '../../img/plus.svg';
+import minusIcon from '../../img/minus.svg';
 
 
 const mapStateToProps =(state:any)=>{
@@ -25,9 +27,16 @@ class Setup extends React.PureComponent<any,any> {
   }
 
   changeWorkTime(hours:number){
+    let value = hours;
+    if(value<0){
+      value = 0
+    }
+    else if(value>12){
+      value = 12
+    }
     this.props.setGlobalSetups({
       ...this.props.setups,
-      workTime:hours
+      workTime:value
     })
   }
 
@@ -154,7 +163,7 @@ class Setup extends React.PureComponent<any,any> {
       });
     }
     else if(process.env.REACT_APP_GITHUB_CLIENT_ID){
-      const BUTTONS = ['登陆帐号'];
+      const BUTTONS = ['登陆帐号','导出离线数据','导入离线数据'];
       ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         maskClosable: true,
@@ -166,7 +175,12 @@ class Setup extends React.PureComponent<any,any> {
             // github oauth 
             window.location.replace("https://github.com/login/oauth/authorize?client_id="+process.env.REACT_APP_GITHUB_CLIENT_ID);
             break;
-        
+          case 1:
+            this.exportData();
+            break;
+          case 2:
+            this.importData();
+            break;
           default:
             break;
         }
@@ -186,33 +200,34 @@ class Setup extends React.PureComponent<any,any> {
             <div className="name">{user.name || "未登陆"}</div>
           </div>
 
-          <List className="emerge">
+                      
+          <div className="flex space-between text-white list">
+            <div>每天投入<sub>/小时</sub></div>
+          
+            <div className="flex ">
+              <div className="step">
+                <img src={minusIcon} alt="subtract" className="full" onClick={()=>this.changeWorkTime(setups.workTime-1)}></img>
+              </div>
+              <div className="step-value">{setups.workTime}</div>
+              <div className="step">
+                <img src={plusIcon} alt="subtract" className="full"  onClick={()=>this.changeWorkTime(setups.workTime+1)}></img>
+              </div>
+            </div>
 
-            
-            <List.Item
-            >
-              云端备份：{setups.backupTime?moment(setups.backupTime).format('YYYY-MM-DD HH:mm:ss'):'无'}
-            </List.Item>
-
-            <List.Item
-              extra={
+          </div>
+          
+          <div className="tips">
+            <div>
+              {
                 //@ts-ignore
-                <Stepper
-                  style={{ width: '100%'}}
-                  showNumber
-                  max={12}
-                  min={0}
-                  step={1}
-                  value={setups.workTime}
-                  onChange={(v)=>this.changeWorkTime(v)}
-                ></Stepper>
+                Parse.User.current()?'用户ID：'+Parse.User.current().get('authData').github.id:''
               }
-            >
-              每天投入<sub>/小时</sub>
-            </List.Item>
+            </div>
+            <div>
+              {setups.backupTime?'云端备份：'+moment(setups.backupTime).format('YYYY-MM-DD HH:mm:ss'):''}
+            </div>
+          </div>
 
-
-          </List>
           <input type="file" ref={this.fileUploadRef} accept=".json,application/json" className="hide" onChange={this.uploadFile}/> 
         </WingBlank>
       </div>

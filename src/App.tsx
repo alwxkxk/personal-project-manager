@@ -18,20 +18,6 @@ const mapStateToProps = (state:any) => {
   return global;
 }
 
-const sidebar = (
-  <List>
-    <List.Item>
-      <Link to="/"><div className="nav-circle nav-color-1"></div>首页</Link>
-    </List.Item>
-    <List.Item>
-      <Link to="/projects"><div className="nav-circle nav-color-2"></div>所有项目</Link>
-    </List.Item>
-    <List.Item>
-      <Link to="/setup"><div className="nav-circle nav-color-3"></div>设置</Link>
-    </List.Item>
-  </List>
-)
-
 
 class App extends React.Component<any> {
   state = {
@@ -46,18 +32,7 @@ class App extends React.Component<any> {
     if(window.innerWidth>768){
       Toast.fail("暂时只支持小屏设备，将会出现样式异常。",10)
     }
-    // testSave()
-    // testAddUser('16029024','ec0ce012ab866d7f1b3e1c6a3ef1aec4b6f53118')
-    // testAddUserByAnonymous("alwqwe")
-    // loginByAnonymous("alwqwe")
 
-    // if(Parse.User.current()){
-    //   testCloudFunction()
-    // }
-    // else{
-    //   loginByGithub('16029024','ec0ce012ab866d7f1b3e1c6a3ef1aec4b6f53118')
-    //   .then(()=>testCloudFunction())
-    // }
   }
 
   render(){
@@ -76,7 +51,19 @@ class App extends React.Component<any> {
             style={{ minHeight: '100vh' }}
             enableDragHandle
             contentStyle={{ color: '#A6A6A6', textAlign: 'center'}}
-            sidebar={sidebar}
+            sidebar={
+              <List>
+                <List.Item className={window.location.pathname === '/' ?'nav-active':''}>
+                  <Link to="/"><div className="nav-circle nav-color-1"></div>首页</Link>
+                </List.Item>
+                <List.Item className={window.location.pathname.includes('/project') ?'nav-active':''}>
+                  <Link to="/projects"><div className="nav-circle nav-color-2"></div>项目</Link>
+                </List.Item>
+                <List.Item className={window.location.pathname === '/setup' ?'nav-active':''}>
+                  <Link to="/setup"><div className="nav-circle nav-color-3"></div>设置</Link>
+                </List.Item>
+            </List>
+            }
             open={this.state.open}
             onOpenChange={this.onOpenChange}
           >

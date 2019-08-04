@@ -37,17 +37,17 @@ class SettingTask extends React.Component<ISettingTaskProps,any>{
   }
 
   deleteTask=()=>{
-    this.props.deleteTaskAction(this.props.task)
     if(this.props.onClick){
       this.props.onClick()
     }
+    this.props.deleteTaskAction(this.props.task)
   }
 
   restoreTask=()=>{
-    this.props.restoreTaskAction(this.props.task)
     if(this.props.onClick){
       this.props.onClick()
     }
+    this.props.restoreTaskAction(this.props.task)
   }
 
 

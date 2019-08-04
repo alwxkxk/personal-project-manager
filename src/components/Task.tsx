@@ -5,6 +5,7 @@ import SettingTask from './SettingTask';
 import {connect} from 'react-redux';
 import {setTask} from '../redux/actions';
 import moment from 'moment';
+import successPng from '../img/success.png'
 
 const CheckboxItem = Checkbox.CheckboxItem;
 interface ITaskProps{
@@ -33,7 +34,12 @@ class Task extends React.Component<ITaskProps,any>{
   handleSwitchClick=(e:any)=>{
   const checked = e.target.checked;
   if(checked){
-    Toast.success("完成任务");
+    Toast.info(
+      <div>
+        <img src={successPng} alt="success"></img>
+        <div>完成任务</div>
+      </div>
+    );
   }
    this.props.setTask({
      ...this.props.task,
