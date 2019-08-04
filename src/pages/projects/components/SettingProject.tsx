@@ -75,7 +75,7 @@ class SettingProject extends React.Component<ISettingProject,any> {
         >
 
         </SettingProjectCommon>
-
+      
         <Flex>
           <Flex.Item>
             <Button type="primary" onClick={this.saveProject}>保存更新</Button>

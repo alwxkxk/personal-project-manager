@@ -11,10 +11,10 @@ if(process.env.REACT_APP_PARSE_APP_ID && process.env.REACT_APP_PARSE_SERVER_URL)
   Parse.serverURL=process.env.REACT_APP_PARSE_SERVER_URL;
   //@ts-ignore
   window.Parse = Parse;
-  console.log("init parse JS SDK.",Parse)
+  console.log("init parse JS SDK.")
 }
 else{
-  console.log("without parse.",Parse)
+  console.log("no parse.")
 }
 
 

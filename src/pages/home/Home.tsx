@@ -15,9 +15,9 @@ const mapStateToProps = (state:any)=>{
    return {global,projects}
 }
 
-const sortByCreateTime = (a:IProject,b:IProject)=>{
+const sortByUpdateTime = (a:IProject,b:IProject)=>{
   //@ts-ignore
-  return new Date(b.createTime) - new Date(a.createTime);
+  return new Date(b.updateTime) - new Date(a.updateTime);
 }
 
 class Home extends React.Component<any,any> {
@@ -31,7 +31,7 @@ class Home extends React.Component<any,any> {
 
     // show the last project
     let lastProject = this.props.projects && 
-      this.props.projects.filter((p:IProject)=> !p.delete).sort(sortByCreateTime)[0]
+      this.props.projects.filter((p:IProject)=> !p.delete).sort(sortByUpdateTime)[0]
     if(lastProject && this.props.global.project && this.props.global.project.uuid !== lastProject.uuid){
       this.props.setGlobalProject(lastProject);
       this.props.setGlobalTasksByProjectId(lastProject.uuid);
