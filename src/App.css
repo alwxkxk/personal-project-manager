@@ -1,5 +1,9 @@
 @import '~antd-mobile/dist/antd-mobile.css';
 
+.hide{
+  display: none;
+}
+
 .add-project{
   width:80vw;
   height: 8rem;

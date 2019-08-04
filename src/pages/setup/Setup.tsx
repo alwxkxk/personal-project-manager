@@ -16,9 +16,12 @@ const mapStateToProps =(state:any)=>{
 }
 
 class Setup extends React.PureComponent<any,any> {
+  fileUploadRef:React.RefObject<any>
+
   constructor(props:any){
     super(props)
     this.props.setNavbarTitle("设置")
+    this.fileUploadRef = React.createRef();
   }
 
   changeWorkTime(hours:number){
@@ -72,7 +75,7 @@ class Setup extends React.PureComponent<any,any> {
         <div>本地更新{updateProjectCount}项目，{updateTaskCount}任务</div>
         <div>推送云端{pushProjects.length}项目，{pushTasks.length}任务</div>
       </div>
-      ,5)
+      )
       this.props.setGlobalSetups({
         ...this.props.setups,
         backupTime:newBackupTime
@@ -81,9 +84,47 @@ class Setup extends React.PureComponent<any,any> {
 
   }
 
+  exportData=()=>{
+    const a = document.createElement('a');
+    const data={
+      tasks:store.getState().tasks,
+      projects:store.getState().projects
+    }
+    a.setAttribute('href', 
+    'data:text/plain;charset=utf-u,'+encodeURIComponent(JSON.stringify(data)) 
+    );
+    a.setAttribute('download', moment().format('YYYY-MM-DD HH-mm-ss')+'.json');
+    a.click()
+  }
+
+  importData=()=>{
+    this.fileUploadRef.current.click();
+  }
+
+  uploadFile = ()=>{
+    const reader = new FileReader();
+
+    reader.onload = ()=>{
+      //@ts-ignore
+      const data = JSON.parse(reader.result || '')
+      console.log("uploadFile:",data)
+      if(data){
+        data.projects.forEach((p:IProject)=>{
+          this.props.setProjectAction(p);
+        })
+        data.tasks.forEach((t:ITask)=>{
+          this.props.setTask(t);
+        })
+        Toast.success(`已导入${data.projects.length}项目，${data.tasks.length}任务`)
+      }
+    };
+
+    reader.readAsText(this.fileUploadRef.current.files[0],'utf-8')
+  }
+
   handleClickAvatar=()=>{
     if(userAvailable()){
-      const BUTTONS = ['退出帐号','数据同步'];
+      const BUTTONS = ['退出帐号','数据同步','导出离线数据','导入离线数据'];
       ActionSheet.showActionSheetWithOptions({
         options: BUTTONS,
         maskClosable: true,
@@ -99,6 +140,12 @@ class Setup extends React.PureComponent<any,any> {
             break;
           case 1:
             this.synchronize();
+            break;
+          case 2:
+            this.exportData();
+            break;
+          case 3:
+            this.importData();
             break;
           default:
             break;
@@ -166,7 +213,7 @@ class Setup extends React.PureComponent<any,any> {
 
 
           </List>
-
+          <input type="file" ref={this.fileUploadRef} accept=".json,application/json" className="hide" onChange={this.uploadFile}/> 
         </WingBlank>
       </div>
 
