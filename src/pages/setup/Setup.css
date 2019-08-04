@@ -1,0 +1,50 @@
+.setup {
+  padding-top:10px;
+  font-size: 1rem;
+}
+.setup .am-list-content{
+  color:white !important;
+}
+
+.setup .am-icon{
+  fill: white;
+}
+
+.setup .am-stepper-input{
+  color:white;
+}
+
+.setup .avatar-img{
+  width: 5rem;
+  height: 5rem;
+  margin: 2rem auto 0.5rem auto;
+  border-radius: 50%;
+}
+
+.setup .name{
+  color: white;
+  margin:0.5rem auto 1rem auto;
+}
+
+.setup .step{
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+
+.setup .step-value{
+  margin: auto 1rem;
+}
+
+.setup .tips{
+  position: absolute;
+  bottom: 4rem;
+  font-size: 0.5rem;
+  text-align: left;
+}
+
+.setup .list{
+  border-bottom: 1px solid;
+  padding: 10px 0;
+}

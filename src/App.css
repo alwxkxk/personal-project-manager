@@ -1,33 +1,278 @@
-.App {
-  text-align: center;
+@import '~antd-mobile/dist/antd-mobile.css';
+
+.hide{
+  display: none;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.add-project{
+  width:80vw;
+  height: 8rem;
+  margin: 1rem auto;
+  border:1px solid white;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  align-items: center;
+  border-radius: 10px;
+}
+
+
+.drawer {
+  position: relative;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drawer .am-list-item{
+  background-color: #2E374F;
+  padding: 0 !important;
+}
+
+.drawer .am-drawer-sidebar {
+  background-color: #2E374F;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.drawer .am-drawer-sidebar .am-list {
+  width: 8rem;
+  padding: 0;
+}
+
+.icon {
+  width:1.5rem;
+  height:1.5rem;
+}
+.am-navbar{
+  background-color: #2E374F;
+}
+.nav-circle{
+  width:1rem;
+  height:1rem;
+  border-radius: 50%;
+  margin: auto 1px;
+  color:white !important;
+}
+
+.nav-color-1{
+  background: rgb(239, 1, 141);
+}
+
+.nav-color-2{
+  background: rgb(102, 46, 145);
+}
+
+.nav-color-3{
+  background: rgb(0, 84, 164);
+}
+
+.nav-color-4{
+  background: rgb(1, 174, 240);
+}
+
+.nav-color-5{
+  background: rgb(0, 168, 82);
+}
+
+.nav-color-6{
+  background: rgb(142, 197, 67);
+}
+
+.nav-active{
+  background-color: rgba(46,55,79,0.8) !important;
+}
+
+@media (max-width: 330px){
+  .am-modal-transparent{
+    width:100vw !important;
+  }
+}
+
+
+@media (min-width: 330px){
+  .am-modal-transparent{
+    width:80vw !important;
+    max-width: 768px;
+  }
+}
+
+.am-list-item .am-list-line .am-list-content{
+  padding-left: 2rem;
+}
+
+.am-list-content a{
+  display: flex;
   color: white;
+  font-weight: 500;
 }
 
-.App-link {
-  color: #61dafb;
+.page{
+  height: 100vh;
+  overflow: scroll;
+  background-color: #2E374F;
 }
 
-@keyframes App-logo-spin {
+.am-card{
+  background-color: #2E374F;
+  border:1px solid #eee;
+}
+
+.flex{
+  display: flex;
+}
+
+.full{
+  width:100%;
+  height:100%;
+}
+
+
+.text-left{
+  text-align: left;
+}
+
+.m5{
+  margin:5px;
+}
+.m10{
+  margin: 10px;
+}
+
+.text-black{
+  color:black;
+}
+
+.text-white{
+  color:white;
+}
+
+.text-gray{
+  color:gray;
+}
+
+.tasks-nav{
+  margin: 1rem;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
+.project-inactive{
+  display: flex;
+  justify-content: space-between;
+  border-bottom:1px solid rgb(166, 166, 166);
+}
+
+.project-inactive .title{
+  color: rgb(166, 166, 166);
+  font-size: 1rem;
+  font-weight: 600;
+  margin:0.25rem;
+}
+
+.background-color-white{
+  background-color: white;
+}
+
+.background-color-gray{
+  background-color: gray !important;
+}
+
+.circle-btn{
+  height: 3rem;
+  width:3rem;
+  border-radius: 50%;
+  margin:0.1rem;
+}
+
+
+/*github color Less --> More: #ebedf0 #c6e48b #7bc96f #239a3b #196127 */
+.background-color-0{
+  background-color: #ebedf0 !important;
+}
+
+.border-color-1{
+  border:1px solid #c6e48b !important;
+}
+
+.background-color-1{
+  background-color: #c6e48b !important;
+}
+
+.border-color-2{
+  border:1px solid #7bc96f !important;
+}
+
+.background-color-2{
+  background-color: #7bc96f !important;
+}
+
+.border-color-3{
+  border:1px solid #239a3b !important;
+}
+
+.background-color-3{
+  background-color: #239a3b !important;
+}
+
+.border-color-4{
+  border:1px solid #196127 !important;
+}
+
+
+.background-color-4{
+  background-color: #196127;
+}
+
+/* css animation */
+@keyframes emerge{
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}
+
+.emerge{
+  animation-name: emerge;
+  animation-duration: 1.5s;
+}
+
+
+@keyframes slide-in {
   from {
-    transform: rotate(0deg);
+    margin-left: 100%;
+    width: 300%; 
+    opacity: 0; 
   }
+
   to {
-    transform: rotate(360deg);
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1; 
   }
 }
+
+.slide-in{
+  animation-duration: 1.5s;
+  animation-name: slide-in;
+  animation-fill-mode: backwards!important;
+}
+
+@keyframes fly-in{
+  from{
+    opacity: 0;
+    margin-top:100vh;
+  }
+  to{
+    opacity: 1;
+    margin-top:0;
+  }
+}
+
+.fly-in{
+  animation-name: fly-in;
+  animation-duration: 1.5s;
+}
+
