@@ -47,3 +47,4 @@
 - [技术文档](https://github.com/alwxkxk/personal-project-manager/wiki/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3)
 - [后端部署（parse server）](https://github.com/alwxkxk/personal-project-manager/wiki/2.%E5%90%8E%E7%AB%AF%E9%83%A8%E7%BD%B2%EF%BC%88parse-server%EF%BC%89)
 
+![](https://camo.githubusercontent.com/8ef65b714e349ecf36c8b3e336f20f6c0d9d8db4/68747470733a2f2f692e6c6f6c692e6e65742f323031392f30382f30332f314575617a4c3974487835675657432e706e67)
